@@ -1,16 +1,31 @@
 __author__ = 'scinawa'
 
+from graph import EdgeList
+
+
+def iterable_partitions(number=0):
+    A_LIST = list(range(0, number))
+    AN_OSET = ordered_set.OrderedSet(A_LIST)
+    A_PARTITION = partition.Partition(AN_OSET)
+    return A_PARTITION
+
+
+
+
 
 
 def stable_partitions_from_networkx(G):
     """
-    To be defined
-    :param G:
-    :return:
+    TODO: check if directed or undirected.
+    :param G: a NetworkX graph.
+    :return: an iterator over the list of stable partitions
     """
-    pass
+    import networkx as nx
+    n=G.nodes()
+    edge_list=G.edge_list()
 
 
+    return
 
 
 def stable_partition_from_numpy(matrix):
@@ -19,8 +34,8 @@ def stable_partition_from_numpy(matrix):
     :param matrix:
     :return:
     """
-    pass
-
+    edge_list=EdgeList()
+    return find_all_stable_partitions(EdgeList(matrix, kind=""))
 
 
 
@@ -38,7 +53,7 @@ def find_all_stable_partitions(A_PARTITION, edge_list):
     return stable_partitions
 
 
-def find_stable_partitions1(A_PARTITION, edge_list):
+def find_stable_partitions(A_PARTITION, edge_list):
     """
     Given an (iterable) list of partitions and the graph, find the next
     stable partition. This is the old version of the algorithm, that iterates
