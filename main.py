@@ -27,7 +27,7 @@ def menu():
     parser = argparse.ArgumentParser()
 
     # mutual exclusion on file type
-    group = parser.add_mutually_exclusive_group()
+    group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("-c", "--csv", help="path of the csv file of the "
                                            "adjacecny matrix",
                        action='store', dest='csv_file')
@@ -64,5 +64,8 @@ if __name__ == '__main__':
         print('It took %s' % used_time) if (used_time > 0) else print("ok")
 
     #### Outputing results
-    with open(parser_args.output_file, mode='w') as f_output:
-        f_output.writelines(stable_partitions)
+    if parser_args.output_file:
+        with open(parser_args.output_file, mode='w') as f_output:
+            f_output.writelines(stable_partitions)
+    else:
+        print(stable_partitions)

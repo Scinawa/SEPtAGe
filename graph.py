@@ -60,7 +60,7 @@ class EdgeList:
         self.__num_nodes = len(file_content)  #
 
         # creiamo gli archi
-        for i in range(0, len(file_content)):
+        for i in range(0, len(file_content)-1):
             splitted_row = file_content[i].split(',')
 
             # removing f*ing  trailing character EOL
@@ -72,7 +72,7 @@ class EdgeList:
                 if (ord(splitted_row[j]) == 48):
                     pass
                 elif (ord(splitted_row[j]) == 49):
-                    self.add_edge(i, j)
+                    self.__edge_list.append((i, j))
                 else:
                     raise Exception("Unable to load csv file: strange char "
                                     "found")
@@ -120,7 +120,7 @@ class EdgeList:
         return 0
 
     def addEdge(self, a, b):
-        self.__edgeList.append((a, b))
+        self.__edge_list.append((a, b))
 
     def __iter__(self):
         """
@@ -128,4 +128,4 @@ class EdgeList:
         code, without getting the edge_list.
         :return:
         """
-        return iter(self.__edgeList)
+        return iter(self.__edge_list)
