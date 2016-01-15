@@ -1,7 +1,7 @@
 ## Synopsis
 
 This software can calculate all the stable partition of a graph. A partition 
-of the nodes is said to be stable if 
+of the nodes is said to be stable if there are no edges connecting two different partition, i.e., the edges of the node of a partition are within the nodes of the partition itself. 
 Since the software is just a wrapper around a single function, it can be 
 easily used as a library compatible with NetworkX and numpy.
 

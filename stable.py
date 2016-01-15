@@ -70,7 +70,6 @@ def find_stable_partitions(edge_list, partitions):
     :param edge_list: the list of edges [(a,b), (c,b), ... ]
     :return: an iterable
     """
-
     unstable_number = 0
     for a_part in partitions:
         unstable = 0
