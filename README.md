@@ -54,7 +54,7 @@ Eg:
 
 Same as networkx specification for graphs.
 
-## Tests
+## Testing and code coverage
 
 I wrote some asserts. Specifically I wrote the code for a clique (complete 
 graph of n elements), and other graphs.
@@ -62,9 +62,20 @@ graph of n elements), and other graphs.
 The software was tested during the course of combinatorics, since the number 
 of stable partition of some graphs is well known, and no bugs were found. 
 
+Recently I am running tests for code coverage and tests on the quality of the dependency I use.
+
+[![Requirements Status](https://requires.io/github/Scinawa/stablepartitions/requirements.svg?branch=master)](https://requires.io/github/Scinawa/stablepartitions/requirements/?branch=master)
+
+[![Coverage Status](https://coveralls.io/repos/github/Scinawa/stablepartitions/badge.svg?branch=master)](https://coveralls.io/github/Scinawa/stablepartitions?branch=master)
+
+
+
+
+
 ## License
 
 GNU General Public License v2.0
+
 
 
 
