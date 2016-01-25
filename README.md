@@ -77,6 +77,6 @@ Recently I am running tests for code coverage and tests on the quality of the de
 GNU General Public License v2.0
 
 
-
+## References
 
 [1] http://wwwf.imperial.ac.uk/~mpbara/Partition_Stability/
