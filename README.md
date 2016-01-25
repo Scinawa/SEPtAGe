@@ -68,7 +68,7 @@ Recently I am running tests for code coverage and tests on the quality of the de
 
 [![Coverage Status](https://coveralls.io/repos/github/Scinawa/stablepartitions/badge.svg?branch=master)](https://coveralls.io/github/Scinawa/stablepartitions?branch=master)
 
-
+[![Build Status](https://drone.io/github.com/Scinawa/stablepartitions/status.png)](https://drone.io/github.com/Scinawa/stablepartitions/latest)
 
 
 
