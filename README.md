@@ -79,7 +79,7 @@ Recently I am running tests for code coverage and tests on the quality of the de
 
 [![Build Status](https://drone.io/github.com/Scinawa/stablepartitions/status.png)](https://drone.io/github.com/Scinawa/stablepartitions/latest)
 
-
+[![Documentation Status](https://readthedocs.org/projects/stablepartitions/badge/?version=latest)](http://stablepartitions.readthedocs.org/en/latest/?badge=latest)
 
 # License
 
