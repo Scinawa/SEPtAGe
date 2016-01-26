@@ -5,13 +5,6 @@ of the nodes is said to be stable if there are no edges connecting two different
 Since the software is just a wrapper around a single function, it can be 
 easily used as a library compatible with NetworkX and numpy.
 
-## Code Example
-
-python3 main.py --csv graph.csv
-
-
-> from stable import find_stable_partitions
-> 
 
 ## Motivation
 
@@ -31,13 +24,25 @@ whether is stable or not.
 ## Possible improvements
 
 The software can be easily adapted to be multithread or even to be distributed.
-It does make little sense indeed. 
+It does make little sense, since the problem is exponential in the number of 
+nodes. The only sensible tuning is to add "@memoization"
 
 ## Installation
-
+Simply run:
 `git clone https://github.com/Scinawa/SEPtAGe`
+You can already run the software with:
 
+`python main.py --csv graph.csv`
+or
+`python main.py --help`.
+
+## As a library
+ 
 In order use this software as a library in your software, you simply need to 
+
+`python3 setup.py install`
+
+and then, in your code:
 
 `from stable import find_stable_partitions`
 
@@ -45,12 +50,18 @@ or
 
 `from stable import find_all_stable_partitions`
 
-Both functions takes an iterable of partitions of a set
-Eg:
+# Networkx
 
-` [(1,2), (2,3), (3,4), (5,7)] `
+`stable_partition_from_networkx(matrix)`
 
-Same as networkx specification for graphs.
+`all_stable_partition_from_networkx(matrix)`
+
+# Numpy
+These are the function for numpy:
+
+`stable_partition_from_numpy(matrix)`
+
+`all_stable_partition_from_numpy(matrix)`
 
 ## Testing and code coverage
 
