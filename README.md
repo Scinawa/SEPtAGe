@@ -26,7 +26,7 @@ knowledge, there are no other OS software that calculates stable partition of
 The asymptotic of the algorithm is exponential in the number of nodes of the 
 graph, and therefore the software cannot work for graph bigger than 20 nodes.
 The algorithms simply iterate through all the possibile partition and check 
-whether is stable or not (iterating a
+whether is stable or not.
 
 ## Possibile improvements
 
@@ -35,7 +35,7 @@ It does make little sense indeed.
 
 ## Installation
 
-`git pull sdrena`
+`git clone https://github.com/Scinawa/SEPtAGe`
 
 In order use this software as a library in your software, you simply need to 
 
