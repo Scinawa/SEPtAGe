@@ -20,9 +20,6 @@ def testing():
     G = nx.complete_graph(5)
     assert find_stable_partitions(Graoh(G))
 
-
-
-
 def menu():
     parser = argparse.ArgumentParser()
 
@@ -54,8 +51,10 @@ if __name__ == '__main__':
     g = EdgeList(parser_args.csv_file,  kind='csv') if parser_args.csv_file else \
         EdgeList(parser_args.numpy_file, kind='numpy')
 
+    # Find the partition of a set of n elements
     partitions = iterable_partitions(g.node_number)
 
+    # print if just one partition or all of them
     if parser_args.just_one:
         (used_time, stable_partitions) = find_stable_partitions(g, partitions)
         print('It took %s' % used_time) if (used_time > 0) else print("ok")
@@ -63,9 +62,12 @@ if __name__ == '__main__':
         (used_time, stable_partitions) = find_all_stable_partitions(g, partitions)
         print('It took %s' % used_time) if (used_time > 0) else print("ok")
 
-    #### Outputing results
+    # Output results
     if parser_args.output_file:
         with open(parser_args.output_file, mode='w') as f_output:
             f_output.writelines(stable_partitions)
     else:
-        print(stable_partitions)
+        from pprint import pprint
+        pprint(stable_partitions)
+    # Bye!
+    sys.exit(0)
