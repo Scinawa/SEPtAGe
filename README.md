@@ -25,10 +25,10 @@ knowledge, there are no other OS software that calculates stable partition of
 
 The asymptotic of the algorithm is exponential in the number of nodes of the 
 graph, and therefore the software cannot work for graph bigger than 20 nodes.
-The algorithms simply iterate through all the possibile partition and check 
+The algorithms simply iterate through all the possible partition and check 
 whether is stable or not.
 
-## Possibile improvements
+## Possible improvements
 
 The software can be easily adapted to be multithread or even to be distributed.
 It does make little sense indeed. 
@@ -39,15 +39,13 @@ It does make little sense indeed.
 
 In order use this software as a library in your software, you simply need to 
 
-from stable import stable_partition
+`from stable import find_stable_partitions`
 
 or
 
-from stable import stable_partitions
+`from stable import find_all_stable_partitions`
 
-for both functions, the single parameter is a list of tuple, where each 
-element of the list is an edge. 
-
+Both functions takes an iterable of partitions of a set
 Eg:
 
 ` [(1,2), (2,3), (3,4), (5,7)] `
