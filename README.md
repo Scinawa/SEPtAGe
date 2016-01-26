@@ -56,7 +56,7 @@ or
 
 `all_stable_partition_from_networkx(matrix)`
 
-# Numpy
+### Numpy
 These are the function for numpy:
 
 `stable_partition_from_numpy(matrix)`
