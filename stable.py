@@ -35,16 +35,15 @@ def stable_partition_from_numpy(matrix):
     return find_all_stable_partitions(EdgeList(matrix, kind=""))
 
 
-def find_all_stable_partitions(A_PARTITION, edge_list):
+def find_all_stable_partitions(partitions, edge_list):
     """
     Iterate over all yelds and give all the stable partition of the graph.
-    :param grafo:
-    :param A_PARTITION:
-    :return:
+    :param partitions: an iterable of partition
+    :param edge_list: the list of edges
+    :return: a list of stable partitions
     """
-
     stable_partitions = []
-    for i in find_stable_partitions(A_PARTITION, edge_list):
+    for i in find_stable_partitions(partitions, edge_list):
         stable_partitions.append(i)
     return stable_partitions
 
@@ -54,7 +53,7 @@ def find_stable_partitions(edge_list, partitions):
     Given an (iterable) list of partitions and the graph, find the next
     stable partition. This is the old version of the algorithm, that iterates
     through all the partitions and then through all the edges. The second
-    versoin is splitted for readability, but I think this must be preferred
+    version is split for readability, but I think this must be preferred
     for performances reasons.
 
     There are some "hacks" in order to improve the performance of the algorithm:
@@ -64,11 +63,9 @@ def find_stable_partitions(edge_list, partitions):
     that edge, the partition i stable and you can skip to check the next edge
     (3) If you are testing for an auto loop =>
 
-
-
     :param partitions: the iterable of partitions by partitionset package
     :param edge_list: the list of edges [(a,b), (c,b), ... ]
-    :return: an iterable
+    :return: yield an iterable of stable partitions
     """
     unstable_number = 0
     for a_part in partitions:
