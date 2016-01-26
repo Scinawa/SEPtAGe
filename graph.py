@@ -10,16 +10,18 @@ class EdgeList:
     edge_list which is a list that we need in order to run our algorithm.
     """
 
-    def __init__(self, input, kind=None):
+    def __init__(self, graph, kind=None):
         self.__edge_list = []
         self.__num_edges = 0
         self.__num_nodes = 0
         if kind == 'numpy':
-            self.read_graph_from_numpy(input)
+            self.edge_list_from_numpy(graph)
         elif kind == 'csv':
-            self.edge_list_from_csv(input)
+            self.edge_list_from_csv(graph)
+        elif kind == 'networkx':
+            self.edge_list_from_networkx(graph)
         else:
-            raise Exception("DISAGIOOO")
+            raise Exception("Format not recognized")
 
     @property
     def node_number(self):
@@ -59,14 +61,14 @@ class EdgeList:
 
         self.__num_nodes = len(file_content)  #
 
-        # creiamo gli archi
-        for i in range(0, len(file_content)-1):
+        # create arcs
+        for i in range(0, len(file_content) - 1):
             splitted_row = file_content[i].split(',')
 
-            # removing f*ing  trailing character EOL
+            # removing trailing char from line
             splitted_row.append(splitted_row.pop().rstrip())
 
-            print(splitted_row)
+            # print(splitted_row)
 
             for j in range(0, len(splitted_row)):
                 if (ord(splitted_row[j]) == 48):
@@ -78,7 +80,11 @@ class EdgeList:
                                     "found")
         return
 
-    def read_graph_from_numpy(self, file_path):
+    def edge_list_from_networkx(self, graph):
+        self.edge_list = graph.edges()
+        return
+
+    def edge_list_from_numpy(self, file_path):
         """
         Read the pickle file and populate the attributes properly.
         The file should be an adjacecny matrix of the graph, that is,
@@ -102,9 +108,7 @@ class EdgeList:
             raise Exception("Unable to read pickled numpy matrix")
 
         for i in range(0, len(fileContent)):
-            self.add_vertex(i)
-        # print "vertex added"
-
+            self.add_vertex(i)  # print "vertex added"
 
         # creiamo gli archi
         for i in range(0, len(fileContent)):
@@ -119,8 +123,6 @@ class EdgeList:
                     self.addEdge(i, j)
         return 0
 
-    def addEdge(self, a, b):
-        self.__edge_list.append((a, b))
 
     def __iter__(self):
         """
