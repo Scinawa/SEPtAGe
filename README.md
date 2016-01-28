@@ -109,6 +109,7 @@ GNU General Public License v2.0
 # References
 
 [1] http://wwwf.imperial.ac.uk/~mpbara/Partition_Stability/
+
 [2] "Fast Balanced Partitioning is Hard, Even on Grids and Trees". 
 Proceedings of the 37th International Symposium on Mathematical Foundations 
 Computer Science (Bratislava, Slovakia).
