@@ -1,9 +1,21 @@
 # Synopsis
 
+[![Requirements Status](https://requires.io/github/Scinawa/stablepartitions/requirements.svg?branch=master)](https://requires.io/github/Scinawa/stablepartitions/requirements/?branch=master)
+
+[![Coverage Status](https://coveralls.io/repos/github/Scinawa/stablepartitions/badge.svg?branch=master)](https://coveralls.io/github/Scinawa/stablepartitions?branch=master)
+
+[![Build Status](https://drone.io/github.com/Scinawa/stablepartitions/status.png)](https://drone.io/github.com/Scinawa/stablepartitions/latest)
+
+[![Documentation Status](https://readthedocs.org/projects/stablepartitions/badge/?version=latest)](http://stablepartitions.readthedocs.org/en/latest/?badge=latest)
+
+
+
 This software can calculate all the stable partition of a graph. A partition 
-of the nodes is said to be stable if there are no edges connecting two different partition, i.e., the edges of the node of a partition are within the nodes of the partition itself. 
-Since the software is just a wrapper around a single function, it can be 
-easily used as a library compatible with NetworkX and numpy.
+of the nodes is said to be stable if there are no edges connecting two  
+different partition, i.e., the edges of the node of a  partition are within 
+the nodes of the partition itself. More formally: Given a graph G=(V,E) and a
+ partition of the nodes P=P_1, P_2, ... P_k, there are no edges (a,b) such as
+  a is in P_i and b is in P_j.
 
 
 # Motivation
@@ -16,10 +28,10 @@ knowledge, there are no other OS software that calculates stable partition of
 
 # Algorithm
 
-The asymptotic of the algorithm is exponential in the number of nodes of the 
+The number of partition is exponential in the number of nodes of the 
 graph, and therefore the software cannot work for graph bigger than 20 nodes.
-The algorithms simply iterate through all the possible partition and check 
-whether is stable or not.
+It is well known that this problem is NP-hard [1]. The algorithms simply 
+iterate through all the possible partition and check whether is stable or not.
 
 # Possible improvements
 
@@ -73,13 +85,6 @@ of stable partition of some graphs is well known, and no bugs were found.
 
 Recently I am running tests for code coverage and tests on the quality of the dependency I use.
 
-[![Requirements Status](https://requires.io/github/Scinawa/stablepartitions/requirements.svg?branch=master)](https://requires.io/github/Scinawa/stablepartitions/requirements/?branch=master)
-
-[![Coverage Status](https://coveralls.io/repos/github/Scinawa/stablepartitions/badge.svg?branch=master)](https://coveralls.io/github/Scinawa/stablepartitions?branch=master)
-
-[![Build Status](https://drone.io/github.com/Scinawa/stablepartitions/status.png)](https://drone.io/github.com/Scinawa/stablepartitions/latest)
-
-[![Documentation Status](https://readthedocs.org/projects/stablepartitions/badge/?version=latest)](http://stablepartitions.readthedocs.org/en/latest/?badge=latest)
 
 # License
 
