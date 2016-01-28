@@ -44,21 +44,23 @@ Simply run:
 `git clone https://github.com/Scinawa/SEPtAGe`
 You can already run the software with:
 
->>> $ python3 main.py --help
->>> usage: main.py [-h] (-c CSV_FILE | -n NUMPY_FILE) [-j] [-v] [-o OUTPUT_FILE]
->>> 
->>> optional arguments:
->>>   -h, --help            show this help message and exit
->>>   -c CSV_FILE, --csv CSV_FILE
->>>                         path of the csv file of the adjacecny matrix
->>>   -n NUMPY_FILE, --numpy NUMPY_FILE
->>>                         path of the numpy (pickled) graph in form of an
->>>                         adjacency matrix
->>>   -j, --justone         return the first stablepartition found, otherwise will
->>>                         keep searching
->>>   -v, --verbose         increase verbosity of operations
->>>   -o OUTPUT_FILE, --output OUTPUT_FILE
->>>                         the path of the output file
+      ```
+      bash $ python3 main.py --help
+      usage: main.py [-h] (-c CSV_FILE | -n NUMPY_FILE) [-j] [-v] [-o OUTPUT_FILE]
+      
+      optional arguments:
+        -h, --help            show this help message and exit
+        -c CSV_FILE, --csv CSV_FILE
+                              path of the csv file of the adjacecny matrix
+        -n NUMPY_FILE, --numpy NUMPY_FILE
+                              path of the numpy (pickled) graph in form of an
+                              adjacency matrix
+        -j, --justone         return the first stablepartition found, otherwise will
+                              keep searching
+        -v, --verbose         increase verbosity of operations
+        -o OUTPUT_FILE, --output OUTPUT_FILE
+                              the path of the output file
+      ```
 
 
 ## As a library
