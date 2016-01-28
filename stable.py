@@ -111,10 +111,10 @@ def find_stable_partition(partitions, edge_list):
         print ("\nPartition: ", a_part, end='')
         unstable = 0
         for edge in edge_list:
-            print(' Edge', edge, end='')
+            print(' Edge: ', edge, end='')
             jump = 0
-            for bucket in [i for i in a_part]:
-                print(" Bucket", a_part.index(bucket), end='')
+            for bucket in a_part:
+                print(" Bucket: ", a_part.index(bucket), end='')
                 for node in bucket:
                     if node == edge[0] or node == edge[1]:
                         if node == edge[0] and node == edge[1]:  # autoloop
@@ -129,6 +129,7 @@ def find_stable_partition(partitions, edge_list):
                                 if missing_node == other_nodes:
                                     unstable_number += 1
                                     unstable = 1
+                                    jump = 1
                                     print (" Unstable (connection)")
                                     break  # good job!
                     else:  # (1)
