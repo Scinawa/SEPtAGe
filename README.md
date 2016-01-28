@@ -44,7 +44,7 @@ Simply run:
 `git clone https://github.com/Scinawa/SEPtAGe`
 You can already run the software with:
 
-`python3 main.py --help
+```python3 main.py --help
 usage: main.py [-h] (-c CSV_FILE | -n NUMPY_FILE) [-j] [-v] [-o OUTPUT_FILE]
 
 optional arguments:
@@ -58,7 +58,7 @@ optional arguments:
                         keep searching
   -v, --verbose         increase verbosity of operations
   -o OUTPUT_FILE, --output OUTPUT_FILE
-                        the path of the output file`
+                        the path of the output file```
 
 
 ## As a library
