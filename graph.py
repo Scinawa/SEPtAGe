@@ -1,7 +1,5 @@
 __author__ = 'user'
 
-import pickle
-
 
 class EdgeList:
     """
@@ -62,29 +60,27 @@ class EdgeList:
         self.__num_nodes = len(file_content)  #
 
         # create arcs
-        for i in range(0, len(file_content) - 1):
-            splitted_row = file_content[i].split(',')
+        for (i, line) in enumerate(file_content):
+            splitted_row = line.split(',')
 
             # removing trailing char from line
-            splitted_row.append(splitted_row.pop().rstrip())
+            splitted_row[-1] = splitted_row[-1].rstrip()
 
-            # print(splitted_row)
-
-            for j in range(0, len(splitted_row)):
-                if (ord(splitted_row[j]) == 48):
+            for (j, col) in enumerate(splitted_row):
+                if col == '0':
                     pass
-                elif (ord(splitted_row[j]) == 49):
+                elif col == '1':
                     self.__edge_list.append((i, j))
+                elif col == '':
+                    pass # ship happends
                 else:
-                    raise Exception("Unable to load csv file: strange char "
-                                    "found")
-        return
+                    raise Exception("Unable to load csv file: strange char ",
+                                    "found: %d" % col)
 
     def edge_list_from_networkx(self, graph):
-        self.edge_list = graph.edges()
-        return
+        self.__edge_list = graph.edges()
 
-    def edge_list_from_numpy(self, file_path):
+    def edge_list_from_numpy(self, matrix):
         """
         Read the pickle file and populate the attributes properly.
         The file should be an adjacecny matrix of the graph, that is,
@@ -100,28 +96,22 @@ class EdgeList:
         :param file_path: the path of the csv file
         :return: None
         """
-        try:
-            f = open(file_path, "r")
-            fileContent = pickle.load(f)
-            f.close()
-        except Exception as e:
-            raise Exception("Unable to read pickled numpy matrix")
 
-        for i in range(0, len(fileContent)):
-            self.add_vertex(i)  # print "vertex added"
+        # create arcs
+        for (i, line) in enumerate(matrix):
+            splitted_row = line.split(',')
 
-        # creiamo gli archi
-        for i in range(0, len(fileContent)):
-            # print "\nriga", i,
-            rigasplittata = fileContent[i]
-            # print "rigasplittata", rigasplittata
-            for j in range(0, len(rigasplittata)):
-                # print j
-                if (rigasplittata[j] == 0):
+            # removing trailing char from line
+            splitted_row[-1] = splitted_row[-1].rstrip()
+
+            for (j, col) in enumerate(splitted_row):
+                if col == '0':
                     pass
+                elif col == '1':
+                    self.__edge_list.append((i, j))
                 else:
-                    self.addEdge(i, j)
-        return 0
+                    raise Exception("Unable to read numpy matrix: strange "
+                                    "char found: %s" % col)
 
 
     def __iter__(self):
