@@ -68,12 +68,14 @@ if __name__ == '__main__':
 
     if parser_args.csv_file:
         edge_list = EdgeList(parser_args.csv_file,  kind='csv')
-        print("Input: ", parser_args.csv_file)
-        print(edge_list.edge_list)
+        print("Input: ", parser_args.csv_file, ": ", edge_list.node_number,
+              "nodes")
+        if parser_args.verbose: print(edge_list.edge_list)
     else:
         edge_list = EdgeList(parser_args.numpy_file, kind='numpy')
-        print("Input: ", parser_args.numpy_file)
-
+        print("Input: ", parser_args.csv_file, ": ", edge_list.node_number,
+              "nodes")
+        if parser_args.verbose: print(edge_list.edge_list)
 
     partitions = iterable_partitions(edge_list.node_number)
 
@@ -90,10 +92,9 @@ if __name__ == '__main__':
     if parser_args.output_file:
         with open(parser_args.output_file, mode='w') as f_output:
             for element in stable_partitions:
-                #print(element)
                 f_output.writelines(str(element)+'\n')
     else:
         for partition in stable_partitions:
             pprint.pprint(partition)
-    print("Found: ", len(stable_partitions))
+    print("Stable: ", len(stable_partitions))
     sys.exit(0)
