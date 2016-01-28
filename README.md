@@ -44,7 +44,7 @@ Simply run:
 `git clone https://github.com/Scinawa/SEPtAGe`
 You can already run the software with:
 
-```python3 main.py --help
+```bash $ python3 main.py --help
 usage: main.py [-h] (-c CSV_FILE | -n NUMPY_FILE) [-j] [-v] [-o OUTPUT_FILE]
 
 optional arguments:
