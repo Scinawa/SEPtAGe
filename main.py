@@ -57,6 +57,9 @@ def menu():
                                                 'partition found, otherwise '
                                                 'will keep searching',
                         action="store_true", dest='just_one')
+    parser.add_argument("-v", '--verbose', help='increase verbosity of '
+                                                'operations',
+                        action='store_true', dest='verbose')
     parser.add_argument('-o', '--output', help='the path of the output file',
                         dest='output_file')
 
@@ -75,11 +78,13 @@ if __name__ == '__main__':
     partitions = iterable_partitions(edge_list.node_number)
 
     if parser_args.just_one:
-        stable_partitions = find_stable_partition(partitions, edge_list )
+        stable_partitions = find_stable_partition(partitions, edge_list,
+                                                  verbose)
         stable_partitions=[stable_partitions]
     else:
         (used_time, stable_partitions) = find_all_stable_partitions(
-                                                        partitions, edge_list)
+                                                        partitions,
+            edge_list, parser_args.verbose)
         print('It took %s' % used_time)
 
     # Output results
