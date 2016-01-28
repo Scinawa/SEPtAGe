@@ -13,17 +13,37 @@ import argparse
 from stable import *
 
 
-def testing():
+def testing_networkx():
     import networkx as nx
-    import numpy as np
 
     G = nx.complete_graph(5)
-    assert find_stable_partitions(Graoh(G))
+
+    edge_list=EdgeList(G, kind='numpy')
+    partitions = iterable_partitions(edge_list.node_number)
+
+    assert find_stable_partitions(partitions, edge_list)
+
+def testing_numpy():
+    import numpy as np
+
+    edge_list=EdgeList(matrix, kind='numpy')
+    partitions = iterable_partitions(edge_list.node_number)
+
+    assert find_stable_partition(partitions, edge_list) == 0
+
+
+
+
+def testing_algorithm():
+    pass
+
+
+
+
 
 def menu():
     parser = argparse.ArgumentParser()
 
-    # mutual exclusion on file type
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("-c", "--csv", help="path of the csv file of the "
                                            "adjacecny matrix",
@@ -47,27 +67,31 @@ def menu():
 if __name__ == '__main__':
     parser_args = menu()
 
-    # reading the input form csv|pickle(numpy)
-    g = EdgeList(parser_args.csv_file,  kind='csv') if parser_args.csv_file else \
-        EdgeList(parser_args.numpy_file, kind='numpy')
-
-    # Find the partition of a set of n elements
-    partitions = iterable_partitions(g.node_number)
-
-    # print if just one partition or all of them
-    if parser_args.just_one:
-        (used_time, stable_partitions) = find_stable_partitions(g, partitions)
-        print('It took %s' % used_time) if (used_time > 0) else print("ok")
+    if parser_args.csv_file:
+        edge_list = EdgeList(parser_args.csv_file,  kind='csv')
     else:
-        (used_time, stable_partitions) = find_all_stable_partitions(g, partitions)
-        print('It took %s' % used_time) if (used_time > 0) else print("ok")
+        edge_list = EdgeList(parser_args.numpy_file, kind='numpy')
+
+    partitions = iterable_partitions(edge_list.node_number)
+
+    if parser_args.just_one:
+        stable_partitions = find_stable_partition(partitions, edge_list )
+        stable_partitions=[stable_partitions]
+    else:
+        (used_time, stable_partitions) = find_all_stable_partitions(
+                                                        partitions, edge_list)
+        print('It took %s' % used_time)
 
     # Output results
     if parser_args.output_file:
         with open(parser_args.output_file, mode='w') as f_output:
-            f_output.writelines(stable_partitions)
+            for element in stable_partitions:
+                print(element)
+                f_output.writelines(str(element)+'\n')
     else:
-        from pprint import pprint
-        pprint(stable_partitions)
+        print ("Your stable partition:")
+        for partition in stable_partitions:
+            pass
+            # print(partition)
     # Bye!
     sys.exit(0)
