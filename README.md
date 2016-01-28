@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/Scinawa/stablepartitions/badge.svg?branch=master)](https://coveralls.io/github/Scinawa/stablepartitions?branch=master)
 [![Build Status](https://drone.io/github.com/Scinawa/stablepartitions/status.png)](https://drone.io/github.com/Scinawa/stablepartitions/latest)
 [![Documentation Status](https://readthedocs.org/projects/stablepartitions/badge/?version=latest)](http://stablepartitions.readthedocs.org/en/latest/?badge=latest)
-
+[![Build Status](https://travis-ci.org/Scinawa/SEPtAGe.svg?branch=master)](https://travis-ci.org/Scinawa/SEPtAGe)
 
 
 This software can calculate all the stable partition of a graph. A partition 
