@@ -80,38 +80,20 @@ class EdgeList:
     def edge_list_from_networkx(self, graph):
         self.__edge_list = graph.edges()
 
+
     def edge_list_from_numpy(self, matrix):
         """
-        Read the pickle file and populate the attributes properly.
-        The file should be an adjacecny matrix of the graph, that is,
-        a NxN matrix of 0 and 1 comma separated, where 0 means no edge,
-        and 1 in row i, column j means that there is a directed arc from i to j
-        Example:
+        Convert to edge list
 
-        0,0,0,0
-        0,1,0,0
-        1,0,0,1
-        1,1,1,1
-
-        :param file_path: the path of the csv file
-        :return: None
+        :param matrix:
+        :return:
         """
+        import numpy as np
 
-        # create arcs
-        for (i, line) in enumerate(matrix):
-            splitted_row = line.split(',')
+        for (x,y), value in np.ndenumerate(matrix):
+            if value == 1:
+                self.__edge_list.append((x, y))
 
-            # removing trailing char from line
-            splitted_row[-1] = splitted_row[-1].rstrip()
-
-            for (j, col) in enumerate(splitted_row):
-                if col == '0':
-                    pass
-                elif col == '1':
-                    self.__edge_list.append((i, j))
-                else:
-                    raise Exception("Unable to read numpy matrix: strange "
-                                    "char found: %s" % col)
 
 
     def __iter__(self):

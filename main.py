@@ -12,20 +12,28 @@ def testing_networkx():
 
     G = nx.complete_graph(5)
 
-    edge_list=EdgeList(G, kind='numpy')
-    partitions = iterable_partitions(edge_list.node_number)
+    edges = EdgeList(G, kind='networkx')
+    parts = iterable_partitions(edges.node_number)
 
-    assert find_stable_partitions(partitions, edge_list)
+    (time, results) = find_all_stable_partitions(parts, edges,
+                                              verbose=0)
+    assert results == []
+    return "Test pass"
+
 
 def testing_numpy():
-    import numpy as np
+    import networkx as nx
 
-    edge_list=EdgeList(matrix, kind='numpy')
-    partitions = iterable_partitions(edge_list.node_number)
+    G = nx.complete_graph(5)
+    matrix = nx.to_numpy_matrix(G)  # i'm lazy..
 
-    assert find_stable_partition(partitions, edge_list) == 0
+    edges = EdgeList(matrix, kind='numpy')
+    parts = iterable_partitions(edges.node_number)
 
-
+    (time, results) = find_all_stable_partitions(parts, edges,
+                                              verbose=0)
+    assert results == []
+    return "Test pass"
 
 
 def testing_algorithm():
@@ -34,7 +42,6 @@ def testing_algorithm():
 
 def testing_code_coverage():
     pass
-
 
 
 def menu():
@@ -67,7 +74,7 @@ if __name__ == '__main__':
     parser_args = menu()
 
     if parser_args.csv_file:
-        edge_list = EdgeList(parser_args.csv_file,  kind='csv')
+        edge_list = EdgeList(parser_args.csv_file, kind='csv')
         print("Input: ", parser_args.csv_file, ": ", edge_list.node_number,
               "nodes")
         if parser_args.verbose: print(edge_list.edge_list)
@@ -82,7 +89,7 @@ if __name__ == '__main__':
     if parser_args.just_one:
         stable_partitions = find_stable_partition(partitions, edge_list,
                                                   parser_args.verbose)
-        stable_partitions=[stable_partitions]
+        stable_partitions = [stable_partitions]
     else:
         (used_time, stable_partitions) = find_all_stable_partitions(
             partitions, edge_list, parser_args.verbose)
@@ -92,7 +99,7 @@ if __name__ == '__main__':
     if parser_args.output_file:
         with open(parser_args.output_file, mode='w') as f_output:
             for element in stable_partitions:
-                f_output.writelines(str(element)+'\n')
+                f_output.writelines(str(element) + '\n')
     else:
         for partition in stable_partitions:
             pprint.pprint(partition)

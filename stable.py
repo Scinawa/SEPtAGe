@@ -16,46 +16,37 @@ def iterable_partitions(number=0):
 ################# Networkx ###################################
 
 
-def stable_partitions_from_networkx(G):
+def stable_partitions_from_networkx(G, verbose=0):
     """
     TODO: check if directed or undirected.
     :param G: a NetworkX graph.
     :return: an iterator over the list of stable partitions
     """
-    import networkx as nx
+
     partitions = iterable_partitions(len(G.nodes()))
     edge_list = EdgeList(G, kind='netwokrx')
-    return find_stable_partitions(partitions, edge_list)
 
-
-def all_stable_partitions_from_networkx(G):
-    """
-    TODO: check if directed or undirected.
-    :param G: a NetworkX graph.
-    :return: an iterator over the list of stable partitions
-    """
-    import networkx as nx
-    n = G.nodes()
-    edge_list = G.edge_list()
-
-    return
-
-
-################# NUMPY ###################################
-
-def stable_partition_from_numpy(matrix):
-    """
-    It calculates the stable partition of a numpy adjacency matrix.
-
-    :param matrix: numpy matrix
-    :return:
-    """
-    edge_list = EdgeList(matrix, kind='numpy')
-    partitions = iterable_partitions(edge_list.node_number)
     return find_stable_partition(partitions, edge_list)
 
 
-def all_stable_partition_from_numpy(matrix):
+def all_stable_partitions_from_networkx(G, verbose=0):
+    """
+    TODO: check if directed or undirected.
+    :param G: a NetworkX graph.
+    :return: an iterator over the list of stable partitions
+    """
+
+    partitions = iterable_partitions(len(G.nodes()))
+    edge_list = EdgeList(G, kind='netwokrx')
+
+    stable_partitions = []
+    for i in find_stable_partition(partitions, edge_list, verbose):
+        stable_partitions.append(i)
+    return stable_partitions
+
+################# NUMPY ###################################
+
+def stable_partition_from_numpy(matrix, verbose=0):
     """
     It calculates the stable partition of a numpy adjacency matrix.
 
@@ -64,7 +55,25 @@ def all_stable_partition_from_numpy(matrix):
     """
     edge_list = EdgeList(matrix, kind='numpy')
     partitions = iterable_partitions(edge_list.node_number)
-    return find_all_stable_partitions(partitions, edge_list)
+
+    return find_stable_partition(partitions, edge_list)
+
+
+def all_stable_partition_from_numpy(matrix, verbose=0):
+    """
+    It calculates the stable partition of a numpy adjacency matrix.
+
+    :param matrix: numpy matrix
+    :return:
+    """
+
+    edges = EdgeList(matrix, kind='numpy')
+    parts = iterable_partitions(edges.node_number)
+    stable_partitions = []
+
+    for i in find_stable_partition(parts, edges, verbose):
+        stable_partitions.append(i)
+    return stable_partitions
 
 
 ################# GENERIC ###################################
