@@ -5,6 +5,7 @@ from partitionsets import ordered_set
 from partitionsets import partition
 import datetime
 
+
 def iterable_partitions(number=0):
     A_LIST = list(range(0, number))
     AN_OSET = ordered_set.OrderedSet(A_LIST)
@@ -26,6 +27,7 @@ def stable_partitions_from_networkx(G):
     edge_list = EdgeList(G, kind='netwokrx')
     return find_stable_partitions(partitions, edge_list)
 
+
 def all_stable_partitions_from_networkx(G):
     """
     TODO: check if directed or undirected.
@@ -37,6 +39,7 @@ def all_stable_partitions_from_networkx(G):
     edge_list = G.edge_list()
 
     return
+
 
 ################# NUMPY ###################################
 
@@ -50,6 +53,7 @@ def stable_partition_from_numpy(matrix):
     edge_list = EdgeList(matrix, kind='numpy')
     partitions = iterable_partitions(edge_list.node_number)
     return find_stable_partitions(partitions, edge_list)
+
 
 def all_stable_partition_from_numpy(matrix):
     """
@@ -66,17 +70,18 @@ def all_stable_partition_from_numpy(matrix):
 ################# GENERIC ###################################
 
 def timeMeasure(function_to_decorate):
-	def a_wrapper_accepting_arbitrary_arguments(*args, **kwargs):
+    def a_wrapper_accepting_arbitrary_arguments(*args, **kwargs):
+        d1 = datetime.datetime.now()
+        result = function_to_decorate(*args, **kwargs)
+        d2 = datetime.datetime.now()
 
-		d1=datetime.datetime.now()
-		result=function_to_decorate(*args, **kwargs)
-		d2=datetime.datetime.now()
+        return (d2 - d1, result)
 
-		return (d2-d1, result)
-	return a_wrapper_accepting_arbitrary_arguments
+    return a_wrapper_accepting_arbitrary_arguments
+
 
 @timeMeasure
-def find_all_stable_partitions(partitions, edge_list):
+def find_all_stable_partitions(partitions, edge_list, verbose):
     """
     Iterate over all yelds and give all the stable partition of the graph.
     :param partitions: an iterable of partition
@@ -84,57 +89,31 @@ def find_all_stable_partitions(partitions, edge_list):
     :return: a list of stable partitions
     """
     stable_partitions = []
-    for i in find_stable_partition(partitions, edge_list):
+    for i in find_stable_partition(partitions, edge_list, verbose):
         stable_partitions.append(i)
     return stable_partitions
 
 
-def find_stable_partition(partitions, edge_list):
+def find_stable_partition(partitions, edge_list, verbose):
     """
-    Given an (iterable) list of partitions and the graph, find the next
-    stable partition. This is the old version of the algorithm, that iterates
-    through all the partitions and then through all the edges. The second
-    version is split for readability, but I think this must be preferred
-    for performances reasons.
-
-    There are some "hacks" in order to improve the performance of the algorithm:
-    (1) If you find JUST one side of the edge in one bucket, it means that for
-    that edge, the partition i stable and you can skip to check the next edge
+    Find the next stable partition of the graph
 
     :param partitions: the iterable of partitions by partitionset package
     :param edge_list: the list of edges [(a,b), (c,b), ... ]
     :return: yield an iterable of stable partitions
     """
-
-    unstable_number = 0
     for a_part in partitions:
-        print ("\nPartition: ", a_part, end='')
         unstable = 0
         for edge in edge_list:
-            print(' Edge: ', edge, end='')
-            jump = 0
-            for bucket in a_part:
-                print(" Bucket: ", a_part.index(bucket), end='')
-                for node in bucket:
-                    if node == edge[0] or node == edge[1]:
-                        if node == edge[0] and node == edge[1]:  # autoloop
-                                unstable_number += 1
-                                unstable = 1
-                                print (" Unstable (autoloop)")
-                                break
-                        else:
-                            other2find = {edge[0], edge[1]} - {node}
-                            missing_node = other2find.pop()
-                            for other_nodes in bucket[bucket.index(node):]:
-                                if missing_node == other_nodes:
-                                    unstable_number += 1
-                                    unstable = 1
-                                    jump = 1
-                                    print (" Unstable (connection)")
-                                    break  # good job!
-                    else:  # (1)
-                        jump = 1
-                if jump or unstable: break # (1)
-        if not unstable:
+            if [i for (i, bucket) in enumerate(a_part) if edge[0] in bucket] \
+                    == [i for (i, bucket) in enumerate(a_part) if edge[1] in
+                            bucket]:
+                if verbose: print(" Partition: ", a_part, ": Not stable!: ",
+                                  edge)
+                unstable = 1
+                break  # go to next partition.
+        if unstable == 0:
+            if verbose: print(" Partition: ", a_part, ": Stable!")
             yield a_part
-
+        else:
+            continue
