@@ -1,16 +1,10 @@
 __author__ = 'scinawa'
 
-import datetime
-# import scipy
 import sys
-import itertools
-# from __future__ import print_function
-from partitionsets import ordered_set
-from partitionsets import partition
-import pickle
 from graph import EdgeList
 import argparse
 from stable import *
+import pprint
 
 
 def testing_networkx():
@@ -38,6 +32,8 @@ def testing_algorithm():
     pass
 
 
+def testing_code_coverage():
+    pass
 
 
 
@@ -72,31 +68,32 @@ if __name__ == '__main__':
 
     if parser_args.csv_file:
         edge_list = EdgeList(parser_args.csv_file,  kind='csv')
+        print("Input: ", parser_args.csv_file)
+        print(edge_list.edge_list)
     else:
         edge_list = EdgeList(parser_args.numpy_file, kind='numpy')
+        print("Input: ", parser_args.numpy_file)
+
 
     partitions = iterable_partitions(edge_list.node_number)
 
     if parser_args.just_one:
         stable_partitions = find_stable_partition(partitions, edge_list,
-                                                  verbose)
+                                                  parser_args.verbose)
         stable_partitions=[stable_partitions]
     else:
         (used_time, stable_partitions) = find_all_stable_partitions(
-                                                        partitions,
-            edge_list, parser_args.verbose)
-        print('It took %s' % used_time)
+            partitions, edge_list, parser_args.verbose)
+        print('It took:  %s' % used_time)
 
     # Output results
     if parser_args.output_file:
         with open(parser_args.output_file, mode='w') as f_output:
             for element in stable_partitions:
-                print(element)
+                #print(element)
                 f_output.writelines(str(element)+'\n')
     else:
-        print ("Your stable partition:")
         for partition in stable_partitions:
-            pass
-            # print(partition)
-    # Bye!
+            pprint.pprint(partition)
+    print("Found: ", len(stable_partitions))
     sys.exit(0)
