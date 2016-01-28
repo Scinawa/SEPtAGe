@@ -52,7 +52,7 @@ def stable_partition_from_numpy(matrix):
     """
     edge_list = EdgeList(matrix, kind='numpy')
     partitions = iterable_partitions(edge_list.node_number)
-    return find_stable_partitions(partitions, edge_list)
+    return find_stable_partition(partitions, edge_list)
 
 
 def all_stable_partition_from_numpy(matrix):
@@ -115,5 +115,3 @@ def find_stable_partition(partitions, edge_list, verbose):
         if unstable == 0:
             if verbose: print(" Partition: ", a_part, ": Stable!")
             yield a_part
-        else:
-            continue
