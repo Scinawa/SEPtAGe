@@ -30,7 +30,7 @@ knowledge, there are no other OS software that calculates stable partition of
 
 The number of partition is exponential in the number of nodes of the 
 graph, and therefore the software cannot work for graph bigger than 20 nodes.
-It is well known that this problem is NP-hard [1]. The algorithms simply 
+It is well known that this problem is NP-hard [2]. The algorithms simply 
 iterate through all the possible partition and check whether is stable or not.
 
 # Possible improvements
@@ -44,7 +44,6 @@ Simply run:
 `git clone https://github.com/Scinawa/SEPtAGe`
 You can already run the software with:
 
-      ```
       bash $ python3 main.py --help
       usage: main.py [-h] (-c CSV_FILE | -n NUMPY_FILE) [-j] [-v] [-o OUTPUT_FILE]
       
@@ -55,12 +54,13 @@ You can already run the software with:
         -n NUMPY_FILE, --numpy NUMPY_FILE
                               path of the numpy (pickled) graph in form of an
                               adjacency matrix
-        -j, --justone         return the first stablepartition found, otherwise will
+        -j, --justone         return the first stable partition found, 
+                              otherwise will
                               keep searching
         -v, --verbose         increase verbosity of operations
         -o OUTPUT_FILE, --output OUTPUT_FILE
                               the path of the output file
-      ```
+      
 
 
 ## As a library
@@ -109,3 +109,6 @@ GNU General Public License v2.0
 # References
 
 [1] http://wwwf.imperial.ac.uk/~mpbara/Partition_Stability/
+[2] "Fast Balanced Partitioning is Hard, Even on Grids and Trees". 
+Proceedings of the 37th International Symposium on Mathematical Foundations 
+Computer Science (Bratislava, Slovakia).
