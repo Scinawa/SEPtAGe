@@ -56,7 +56,7 @@ def menu():
                                              'matrix', action='store',
                        dest='numpy_file')
 
-    parser.add_argument("-j", "--justone", help='return the first stable'
+    parser.add_argument("-j", "--justone", help='return the first stable '
                                                 'partition found, otherwise '
                                                 'will keep searching',
                         action="store_true", dest='just_one')
